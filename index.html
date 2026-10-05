@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kerith Paul Perla · AI Developer</title>
+<meta name="description" content="AI Developer building RAG pipelines, multi-agent systems and legal-tech platforms.">
+<style>
+:root{--bg:#070a14;--card:#0f1424;--line:#1f2745;--tx:#e2e8f0;--mut:#8b97b5;--c1:#22d3ee;--c2:#a78bfa;--c3:#f472b6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+canvas#net{position:fixed;inset:0;z-index:0}
+main,header,footer,nav{position:relative;z-index:1}
+nav{position:sticky;top:0;display:flex;justify-content:center;gap:22px;padding:14px;background:rgba(7,10,20,.72);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:5}
+nav a{color:var(--mut);text-decoration:none;font-size:14px;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+nav a:hover{color:var(--c1)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{letter-spacing:.4em;color:var(--mut);font-size:13px;text-transform:uppercase}
+h1{font-size:clamp(40px,8vw,84px);line-height:1.05;font-weight:800;margin:10px 0 16px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c1));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 8s linear infinite}
+@keyframes flow{to{background-position:300% 0}}
+.typed{font-family:Consolas,'Liberation Mono',Menlo,monospace;font-size:clamp(16px,2.6vw,24px);min-height:1.6em}
+.typed::after{content:"▍";color:var(--c1);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{padding:12px 22px;border-radius:999px;border:1px solid var(--c1);color:var(--c1);text-decoration:none;font-weight:600;transition:.25s;position:relative;overflow:hidden}
+.btn:hover{background:var(--c1);color:#001018;box-shadow:0 0 28px rgba(34,211,238,.55);transform:translateY(-2px)}
+.btn.alt{border-color:var(--c2);color:var(--c2)}
+.btn.alt:hover{background:var(--c2);color:#10062a;box-shadow:0 0 28px rgba(167,139,250,.55)}
+section{padding:80px 0}
+h2{font-size:32px;margin-bottom:8px}
+h2 span{color:var(--c1);font-family:Consolas,monospace;font-size:.7em;margin-right:8px}
+.sub{color:var(--mut);margin-bottom:32px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:center}
+.stat b{display:block;font-size:42px;background:linear-gradient(90deg,var(--c1),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat small{color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.chip{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--mut);padding:8px 16px;border-radius:999px;font-size:14px;transition:.2s;font-family:inherit}
+.chip:hover,.chip.on{border-color:var(--c2);color:var(--tx);box-shadow:0 0 16px rgba(167,139,250,.35)}
+.skills{display:flex;flex-wrap:wrap;gap:10px;min-height:120px}
+.sk{padding:8px 14px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-family:Consolas,monospace;font-size:14px;transition:.3s;animation:pop .4s both}
+.sk:hover{border-color:var(--c1);transform:translateY(-3px) scale(1.06);color:var(--c1)}
+@keyframes pop{from{opacity:0;transform:scale(.7)}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;perspective:1000px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;transition:transform .15s ease,border-color .3s,box-shadow .3s;transform-style:preserve-3d;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(167,139,250,.18),transparent 45%);opacity:0;transition:.3s}
+.card:hover{border-color:var(--c2);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.card:hover::before{opacity:1}
+.card h3{font-size:22px;margin-bottom:4px}
+.card .tag{color:var(--c1);font-size:13px;margin-bottom:12px;font-family:Consolas,monospace}
+.card ul{padding-left:18px;color:#c3cbe0;font-size:15px}
+.card li{margin:6px 0}
+.pills{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+.pills i{font-style:normal;font-size:12px;padding:3px 10px;border-radius:999px;background:#151b33;border:1px solid var(--line);color:var(--mut)}
+.tl{border-left:2px solid var(--line);margin-left:8px;padding-left:26px}
+.ev{position:relative;margin-bottom:26px;cursor:pointer}
+.ev::before{content:"";position:absolute;left:-34px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--c1);box-shadow:0 0 0 0 rgba(34,211,238,.6);animation:ping 2.4s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 14px rgba(34,211,238,0)}100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}}
+.ev h4{font-size:18px}
+.ev .when{color:var(--mut);font-size:13px;font-family:Consolas,monospace}
+.ev .more{max-height:0;overflow:hidden;transition:max-height .5s ease;color:#c3cbe0;font-size:15px}
+.ev.open .more{max-height:600px}
+.ev .more li{margin:6px 0 0 18px}
+.badges{display:flex;gap:16px;flex-wrap:wrap}
+.badge{flex:1 1 280px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;transition:.3s}
+.badge:hover{transform:rotate(-1deg) translateY(-4px);border-color:var(--c3)}
+.badge small{color:var(--mut)}
+footer{text-align:center;padding:50px 20px;color:var(--mut);font-size:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--card);border:1px solid var(--c3);padding:12px 20px;border-radius:12px;transition:.5s;z-index:20}
+.toast.show{transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(30px);transition:.8s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="net" aria-hidden="true"></canvas>
+<nav><a href="#about">About</a><a href="#skills">Skills</a><a href="#work">Work</a><a href="#journey">Journey</a><a href="#certs">Certs</a></nav>
+
+<header class="wrap hero" id="top">
+  <div class="eyebrow">Hello, world · I'm</div>
+  <h1>Kerith Paul Perla</h1>
+  <div class="typed" id="typed"></div>
+  <div class="cta">
+    <a class="btn" href="https://github.com/KerithPaul" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn alt" href="mailto:kerithpaul188@gmail.com">Say hello</a>
+    <a class="btn" href="#work">See my work ↓</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="about" class="reveal">
+    <h2><span>01</span>About</h2>
+    <p class="sub">AI Developer at LexFintech building legal-tech that survives production, from RAG with hallucination control to zero-trust microservices.</p>
+    <div class="stats">
+      <div class="stat"><b data-n="50" data-suffix="+">0</b><small>page filings summarized</small></div>
+      <div class="stat"><b data-n="7">0</b><small>agents orchestrated</small></div>
+      <div class="stat"><b data-n="5">0</b><small>ID document types extracted</small></div>
+      <div class="stat"><b data-n="2">0</b><small>industry certifications</small></div>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <h2><span>02</span>Skills</h2>
+    <p class="sub">Tap a category to filter.</p>
+    <div class="chips" id="chips"></div>
+    <div class="skills" id="skills-list"></div>
+  </section>
+
+  <section id="work" class="reveal">
+    <h2><span>03</span>Featured projects</h2>
+    <p class="sub">Hover for the tilt.</p>
+    <div class="grid">
+      <article class="card tilt">
+        <h3>ArchitectOS</h3>
+        <div class="tag">AI-powered SEO / AEO / GEO optimization platform</div>
+        <ul>
+          <li>Unifies GitHub repos, WordPress sites and live URLs into one Website Model.</li>
+          <li>Hybrid RAG: Qdrant + Neo4j graph traversal + BAAI cross-encoder reranking.</li>
+          <li>Seven agents coordinated by an Evidence Engine that traces every finding.</li>
+          <li>Docker-sandboxed validation, Playwright/Lighthouse checks, semantic rollback.</li>
+        </ul>
+        <div class="pills"><i>Python</i><i>FastAPI</i><i>Next.js</i><i>LangChain</i><i>Qdrant</i><i>Neo4j</i></div>
+      </article>
+      <article class="card tilt">
+        <h3>Saree Virtual Try-On</h3>
+        <div class="tag">Pose-aware generation with diffusion-based fabric polish</div>
+        <ul>
+          <li>Dresses a studio model across three poses; face, hands, hair and background stay identical.</li>
+          <li>rembg + SegFormer B2 segmentation, LAB shading, body / border / pallu zones.</li>
+          <li>Piecewise affine warp, then a light Stable Diffusion + ControlNet Tile polish on the garment only.</li>
+          <li>Automated quality gates; tuned for a 4 GB GPU.</li>
+        </ul>
+        <div class="pills"><i>PyTorch</i><i>Stable Diffusion</i><i>ControlNet</i><i>SegFormer</i></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="journey" class="reveal">
+    <h2><span>04</span>Journey</h2>
+    <p class="sub">Click an entry to expand.</p>
+    <div class="tl">
+      <div class="ev open">
+        <h4>AI Developer · LexFintech</h4><div class="when">Jul 2025 – Present</div>
+        <div class="more"><ul>
+          <li>AI legal notice generator: FastAPI, HuggingFace, Groq, Ollama, RAG with Pydantic-enforced outputs.</li>
+          <li>Multi-agent lead qualification with LangChain + LangGraph.</li>
+          <li>Co-architected LawyerOffice ERP (NestJS, Next.js 16, Prisma, MySQL) with an RS256 JWT zero-trust mesh.</li>
+          <li>SSE-streamed legal filing summarizer, OCR + translation module, ID-document extraction pipeline.</li>
+        </ul></div>
+      </div>
+      <div class="ev">
+        <h4>B.Tech · DVR &amp; Dr. HS MIC College of Technology</h4><div class="when">2021 – 2025 · CGPA 7.6 / 10</div>
+        <div class="more"><ul><li>Foundations in ML, deep learning and NLP, then straight into building LLM systems.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certs" class="reveal">
+    <h2><span>05</span>Certifications</h2>
+    <p class="sub">&nbsp;</p>
+    <div class="badges">
+      <div class="badge"><b>Certified Ethical Hacker (CEH v12)</b><br><small>Issued 15 Feb 2024 · Expires 14 Feb 2027</small></div>
+      <div class="badge"><b>Oracle Cloud 2024 Generative AI Certified Professional</b><br><small>Issued 31 Jul 2024 · Expires 31 Jul 2027</small></div>
+    </div>
+  </section>
+</main>
+
+<footer>Built with curiosity · try the Konami code ↑ ↑ ↓ ↓ ← → ← → B A</footer>
+<div class="toast" id="toast">🎉 Party mode: on</div>
+
+<script>
+// typing hero
+const phrases=["AI Developer @ LexFintech","Building RAG pipelines & multi-agent systems","Microservices · LLMs · Computer Vision","CEH v12 · Oracle GenAI Certified Professional"];
+const typedEl=document.getElementById("typed");let pi=0,ci=0,del=false;
+(function tick(){const p=phrases[pi];typedEl.textContent=p.slice(0,ci);
+  if(!del&&ci===p.length){del=true;return setTimeout(tick,1600)}
+  if(del&&ci===0){del=false;pi=(pi+1)%phrases.length}
+  ci+=del?-1:1;setTimeout(tick,del?25:55)})();
+
+// skills filter
+const SK={
+ "AI / ML":["Machine Learning","Deep Learning","NLP","RAG","LLMs","Generative AI","Scikit-Learn","TensorFlow","PyTorch","Keras","OpenCV","HuggingFace","Stable Diffusion","ControlNet"],
+ "Agentic AI":["Multi-Agent Systems","Harness Engineering","Agentic Loop Engineering","Context Engineering","Prompt Engineering","Tool Use / Function Calling","LLM Evaluation & Guardrails"],
+ "Backend":["FastAPI","LangChain","LangGraph","MCP","n8n","WebSockets","NestJS","Next.js","Prisma","MySQL"],
+ "Data & Tools":["Qdrant","Neo4j","Redis","Docker","Git","GitHub","EDA","Feature Engineering"],
+ "Languages":["Python","SQL"]
+};
+const chips=document.getElementById("chips"),list=document.getElementById("skills-list");
+function show(cat){list.innerHTML="";const items=cat==="All"?Object.values(SK).flat():SK[cat];
+  items.forEach((s,i)=>{const d=document.createElement("div");d.className="sk";d.textContent=s;d.style.animationDelay=i*25+"ms";list.appendChild(d)});
+  [...chips.children].forEach(c=>c.classList.toggle("on",c.dataset.c===cat))}
+["All",...Object.keys(SK)].forEach(c=>{const b=document.createElement("button");b.className="chip";b.textContent=c;b.dataset.c=c;b.onclick=()=>show(c);chips.appendChild(b)});
+show("All");
+
+// timeline accordion
+document.querySelectorAll(".ev").forEach(e=>e.addEventListener("click",()=>e.classList.toggle("open")));
+
+// scroll reveal + counters
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");
+  e.target.querySelectorAll("[data-n]").forEach(el=>{if(el.dataset.done)return;el.dataset.done=1;const n=+el.dataset.n,suf=el.dataset.suffix||"";let v=0;
+    const step=()=>{v+=Math.max(1,n/40);if(v>=n){el.textContent=n+suf}else{el.textContent=Math.floor(v)+suf;requestAnimationFrame(step)}};step()});
+  io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".reveal").forEach(s=>io.observe(s));
+
+// 3D tilt + spotlight
+document.querySelectorAll(".tilt").forEach(c=>{
+  c.addEventListener("mousemove",e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    c.style.transform=`rotateX(${(.5-y)*8}deg) rotateY(${(x-.5)*10}deg) translateZ(6px)`;c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%")});
+  c.addEventListener("mouseleave",()=>c.style.transform="")});
+
+// particle network that reacts to the mouse
+const cv=document.getElementById("net"),ctx=cv.getContext("2d");let W,H,pts=[],mouse={x:-999,y:-999},party=false;
+function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;pts=Array.from({length:Math.min(90,Math.floor(W*H/16000))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5}))}
+addEventListener("resize",size);size();
+addEventListener("mousemove",e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let hue=190;
+function draw(){ctx.clearRect(0,0,W,H);if(party)hue=(hue+2)%360;
+  const col=party?`hsl(${hue},90%,65%)`:"#22d3ee";
+  pts.forEach(p=>{p.x+=p.vx*(party?4:1);p.y+=p.vy*(party?4:1);if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+    const dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.hypot(dx,dy);if(d<120){p.x+=dx/d*1.6;p.y+=dy/d*1.6}
+    ctx.fillStyle=col;ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,6.283);ctx.fill()});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d<130){ctx.globalAlpha=(1-d/130)*.35;ctx.strokeStyle=party?`hsl(${(hue+j*7)%360},90%,65%)`:"#a78bfa";ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}
+  const m=pts.length;for(let i=0;i<m;i++){const a=pts[i],d=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(d<160){ctx.globalAlpha=(1-d/160)*.6;ctx.strokeStyle="#f472b6";ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke()}}
+  if(!reduce)requestAnimationFrame(draw)}
+draw();
+
+// konami easter egg
+const K=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];let ki=0;
+addEventListener("keydown",e=>{ki=(e.key.toLowerCase()===K[ki].toLowerCase())?ki+1:0;
+  if(ki===K.length){ki=0;party=!party;const t=document.getElementById("toast");t.textContent=party?"🎉 Party mode: on":"Party mode: off";t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}});
+</script>
+</body>
+</html>
